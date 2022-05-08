@@ -46,11 +46,10 @@ public class Enemy extends AEnemy implements ICollision {
                 this.getPosicion().getX(), this.getPosicion().getY(),
                 this.getSize().getWidth(), this.getSize().getHeight());
 
-    
         this.balas.forEach(b -> {
             b.draw(gc);
         });
-       
+
     }
 
     @Override
@@ -58,14 +57,15 @@ public class Enemy extends AEnemy implements ICollision {
         /*
         TODO BALAS
          */
+
         Bullet tempo;
         int random = (int) (Math.random() * 200);
 
         if (random < 2) {
-            tempo = FactoryBullet.create("FireBullet");
+            tempo = FactoryBullet.create("LaserBullet");
             tempo.init(new Coordenada(this.getPosicion().getX(), this.getPosicion().getY() + 10), board);
             tempo.setInc(-6);
-            //this.balas.add(tempo);
+            this.balas.add(tempo);
         }
 
     }

@@ -75,7 +75,7 @@ public class Level implements IDrawable, IWarnClock, IKeyListener {
     ArrayList<Bullet> bullets;
     ArrayList<Bullet> balasenemigos;
 
-    Enemy enemigo1;
+    
 
     public Level(String image_path, String music_path, Size s, int speed, Coordenada start_position, GraphicsContext bg_ctx, float[] probabilidad_enemigos, int fin) {
         this.background = new Background(image_path, s, speed, start_position);
