@@ -55,7 +55,7 @@ public class Level implements IDrawable, IWarnClock, IKeyListener {
         END
     }
     private static String[] msg = {
-        "\"Pulsar una tecla para empezar", "Siguiente nivel... \nULTIMA PUNTUACIÓN: "};
+        "\"Pulsar una tecla para empezar", "Siguiente nivel..."};
     private String background_path;
     private int speed;
     private int position;
@@ -129,12 +129,12 @@ public class Level implements IDrawable, IWarnClock, IKeyListener {
             gc.fillText(Level.msg[0], 100, 200);
             try {
                 gc.setFill(Color.GREEN);
-                gc.strokeText("Mejor Puntuacion: " + this.getScore(), 200, 300);
-                gc.fillText("Mejor Puntuacion: " + this.getScore(), 200, 300);
+                gc.strokeText("Ultima Puntuacion: " + this.getScore(), 200, 300);
+                gc.fillText("Ultima Puntuacion: " + this.getScore(), 200, 300);
             } catch (FileNotFoundException ex) {
                 gc.setFill(Color.GREEN);
-                gc.strokeText("Mejor Puntuacion: 0" , 200, 300);
-                gc.fillText("Mejor Puntuacion: 0" , 200, 300);
+                gc.strokeText("Ultima Puntuacion: 0" , 200, 300);
+                gc.fillText("Ultima Puntuacion: 0" , 200, 300);
             }
         }
 
