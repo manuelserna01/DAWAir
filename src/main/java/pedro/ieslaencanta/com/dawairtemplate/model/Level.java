@@ -4,10 +4,14 @@
  */
 package pedro.ieslaencanta.com.dawairtemplate.model;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import pedro.ieslaencanta.com.dawairtemplate.enemigo.Enemy;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -32,6 +36,16 @@ import pedro.ieslaencanta.com.dawairtemplate.model.sprites.SpriteMove;
  */
 public class Level implements IDrawable, IWarnClock, IKeyListener {
 
+    public String getScore() throws FileNotFoundException {
+        String tempo = "";
+        File doc = new File("score.txt");
+        Scanner obj = new Scanner(doc);
+        while (obj.hasNextLine()) {
+            tempo = obj.nextLine();
+        }
+        return tempo;
+    }
+
     public enum Estado {
         PRE_STARTED,
         RUNNING,
@@ -40,7 +54,8 @@ public class Level implements IDrawable, IWarnClock, IKeyListener {
         PRE_END,
         END
     }
-    private static String[] msg = {"\"Pulsar una tecla para empezar", "Siguiente nivel..."};
+    private static String[] msg = {
+        "\"Pulsar una tecla para empezar", "Siguiente nivel... \nULTIMA PUNTUACIÓN: "};
     private String background_path;
     private int speed;
     private int position;
@@ -112,6 +127,15 @@ public class Level implements IDrawable, IWarnClock, IKeyListener {
             gc.setStroke(Color.WHITE);
             gc.strokeText(Level.msg[0], 100, 200);
             gc.fillText(Level.msg[0], 100, 200);
+            try {
+                gc.setFill(Color.GREEN);
+                gc.strokeText("Mejor Puntuacion: " + this.getScore(), 200, 300);
+                gc.fillText("Mejor Puntuacion: " + this.getScore(), 200, 300);
+            } catch (FileNotFoundException ex) {
+                gc.setFill(Color.GREEN);
+                gc.strokeText("Mejor Puntuacion: 0" , 200, 300);
+                gc.fillText("Mejor Puntuacion: 0" , 200, 300);
+            }
         }
 
         if (this.getEstado() == Estado.RUNNING) {

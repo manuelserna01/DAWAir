@@ -4,6 +4,9 @@
  */
 package pedro.ieslaencanta.com.dawairtemplate.stages;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javafx.application.Platform;
@@ -25,6 +28,23 @@ import pedro.ieslaencanta.com.dawairtemplate.model.Size;
  * @author Pedro
  */
 public class GameStage extends AbstractScene {
+
+    public void setNewHighScore(int score) {
+        try {
+            String ruta = "score.txt";
+            File file = new File(ruta);
+            // Si el archivo no existe es creado
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(score + "");
+            bw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private Level actual;
     private Size s;
@@ -97,6 +117,7 @@ public class GameStage extends AbstractScene {
             // Para el juego si no te quedan más vidas.
             if (this.player.getLifes() < 0) {
                 // Sale del juego
+                setNewHighScore((int) this.player.getScore());
                 System.exit(0);
             }
         }
